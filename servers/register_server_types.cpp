@@ -67,6 +67,7 @@
 #include "rendering/renderer_rd/storage_rd/render_data_rd.h"
 #include "rendering/renderer_rd/storage_rd/render_scene_buffers_rd.h"
 #include "rendering/renderer_rd/storage_rd/render_scene_data_rd.h"
+#include "rendering/renderer_rd/storage_rd/render_light_storage_rd.h"
 #include "rendering/renderer_rd/uniform_set_cache_rd.h"
 #include "rendering/rendering_device.h"
 #include "rendering/rendering_device_binds.h"
@@ -79,6 +80,7 @@
 #include "text/text_server_dummy.h"
 #include "text/text_server_extension.h"
 #include "text_server.h"
+#include "rendering/storage/render_light_storage.h"
 
 // 2D physics and navigation.
 #include "navigation_server_2d.h"
@@ -241,6 +243,9 @@ void register_server_types() {
 	GDREGISTER_ABSTRACT_CLASS(RenderSceneBuffers);
 	GDREGISTER_CLASS(RenderSceneBuffersExtension);
 	GDREGISTER_CLASS(RenderSceneBuffersRD);
+
+	GDREGISTER_ABSTRACT_CLASS(RenderLightStorage);
+	GDREGISTER_CLASS(RenderLightStorageRD);
 
 	GDREGISTER_CLASS(FramebufferCacheRD);
 	GDREGISTER_CLASS(UniformSetCacheRD);

@@ -1,5 +1,5 @@
 /**************************************************************************/
-/*  render_data_rd.cpp                                                    */
+/*  render_light_storage.h                                                */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
@@ -28,24 +28,25 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#include "render_data_rd.h"
+#ifndef RENDER_LIGHT_STORAGE_H
+#define RENDER_LIGHT_STORAGE_H
 
-RenderLightStorage *RenderDataRD::get_render_light_storage() const {
-	return light_storage;
-}
+#include "core/object/class_db.h"
+#include "core/object/gdvirtual.gen.inc"
+#include "core/object/object.h"
+#include "core/object/script_language.h"
 
-Ref<RenderSceneBuffers> RenderDataRD::get_render_scene_buffers() const {
-	return render_buffers;
-}
+class RenderLightStorage : public Object {
+	GDCLASS(RenderLightStorage, Object);
 
-RenderSceneData *RenderDataRD::get_render_scene_data() const {
-	return scene_data;
-}
+protected:
+	static void _bind_methods();
 
-RID RenderDataRD::get_environment() const {
-	return environment;
-}
+public:
+	virtual RID get_directional_light_buffer() const = 0;
+	virtual RID get_omni_light_buffer() const = 0;
+	virtual RID get_shadow_atlas() const = 0;
 
-RID RenderDataRD::get_camera_attributes() const {
-	return camera_attributes;
-}
+};
+
+#endif // RENDER_SCENE_DATA_H

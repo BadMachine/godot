@@ -31,6 +31,7 @@
 #include "render_data.h"
 
 void RenderData::_bind_methods() {
+	ClassDB::bind_method(D_METHOD("get_render_light_storage"), &RenderData::get_render_light_storage);
 	ClassDB::bind_method(D_METHOD("get_render_scene_buffers"), &RenderData::get_render_scene_buffers);
 	ClassDB::bind_method(D_METHOD("get_render_scene_data"), &RenderData::get_render_scene_data);
 	ClassDB::bind_method(D_METHOD("get_environment"), &RenderData::get_environment);
@@ -38,6 +39,7 @@ void RenderData::_bind_methods() {
 }
 
 void RenderDataExtension::_bind_methods() {
+	GDVIRTUAL_BIND(_get_render_light_storage);
 	GDVIRTUAL_BIND(_get_render_scene_buffers);
 	GDVIRTUAL_BIND(_get_render_scene_data)
 	GDVIRTUAL_BIND(_get_environment)
@@ -53,6 +55,12 @@ Ref<RenderSceneBuffers> RenderDataExtension::get_render_scene_buffers() const {
 RenderSceneData *RenderDataExtension::get_render_scene_data() const {
 	RenderSceneData *ret = nullptr;
 	GDVIRTUAL_CALL(_get_render_scene_data, ret);
+	return ret;
+}
+
+RenderLightStorage *RenderDataExtension::get_render_light_storage() const {
+	RenderLightStorage *ret = nullptr;
+	GDVIRTUAL_CALL(_get_render_light_storage, ret);
 	return ret;
 }
 

@@ -1,5 +1,5 @@
 /**************************************************************************/
-/*  render_data_rd.cpp                                                    */
+/*  render_light_storage_rd.h                                             */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
@@ -28,24 +28,32 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#include "render_data_rd.h"
+#ifndef RENDER_LIGHT_STORAGE_RD_H
+#define RENDER_LIGHT_STORAGE_RD_H
 
-RenderLightStorage *RenderDataRD::get_render_light_storage() const {
-	return light_storage;
-}
+#include "render_scene_buffers_rd.h"
+#include "servers/rendering/renderer_scene_render.h"
+#include "servers/rendering/rendering_device.h"
+#include "servers/rendering/storage/render_light_storage.h"
 
-Ref<RenderSceneBuffers> RenderDataRD::get_render_scene_buffers() const {
-	return render_buffers;
-}
+// This is a container for data related to rendering a single frame of a viewport where we load this data into a UBO
+// that can be used by the main scene shader but also by various effects.
 
-RenderSceneData *RenderDataRD::get_render_scene_data() const {
-	return scene_data;
-}
+class RenderLightStorageRD : public RenderLightStorage {
+	GDCLASS(RenderLightStorageRD, RenderLightStorage);
 
-RID RenderDataRD::get_environment() const {
-	return environment;
-}
+public:
+	RID directional_light_buffer;
+	RID omni_light_buffer;
+	RID shadow_atlas;
 
-RID RenderDataRD::get_camera_attributes() const {
-	return camera_attributes;
-}
+	virtual RID get_directional_light_buffer() const override;
+	virtual RID get_omni_light_buffer() const override;
+	virtual RID get_shadow_atlas() const override;
+
+//private:
+//	RID directional_light_buffer;
+//	RID omni_light_buffer;
+};
+
+#endif // RENDER_SCENE_DATA_RD_H

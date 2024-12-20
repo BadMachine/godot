@@ -1,5 +1,5 @@
 /**************************************************************************/
-/*  render_data_rd.cpp                                                    */
+/*  render_light_storage.cpp                                              */
 /**************************************************************************/
 /*                         This file is part of:                          */
 /*                             GODOT ENGINE                               */
@@ -28,24 +28,11 @@
 /* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                 */
 /**************************************************************************/
 
-#include "render_data_rd.h"
+#include "render_light_storage.h"
 
-RenderLightStorage *RenderDataRD::get_render_light_storage() const {
-	return light_storage;
-}
 
-Ref<RenderSceneBuffers> RenderDataRD::get_render_scene_buffers() const {
-	return render_buffers;
-}
-
-RenderSceneData *RenderDataRD::get_render_scene_data() const {
-	return scene_data;
-}
-
-RID RenderDataRD::get_environment() const {
-	return environment;
-}
-
-RID RenderDataRD::get_camera_attributes() const {
-	return camera_attributes;
+void RenderLightStorage::_bind_methods() {
+	ClassDB::bind_method(D_METHOD("get_directional_light_buffer"), &RenderLightStorage::get_directional_light_buffer);
+	ClassDB::bind_method(D_METHOD("get_omni_light_buffer"), &RenderLightStorage::get_omni_light_buffer);
+	ClassDB::bind_method(D_METHOD("get_shadow_atlas"), &RenderLightStorage::get_shadow_atlas);
 }

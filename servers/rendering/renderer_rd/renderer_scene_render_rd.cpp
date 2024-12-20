@@ -1187,11 +1187,20 @@ void RendererSceneRenderRD::render_scene(const Ref<RenderSceneBuffers> &p_render
 		scene_data.time_step = time_step;
 	}
 
+	// setup render light storage object
+	RenderLightStorageRD render_light_storage;
+	{
+		render_light_storage.directional_light_buffer = light_storage->get_directional_light_buffer();
+		render_light_storage.omni_light_buffer = light_storage->get_omni_light_buffer();
+		render_light_storage.shadow_atlas = p_shadow_atlas;
+	}
+
 	//assign render data
 	RenderDataRD render_data;
 	{
 		render_data.render_buffers = rb;
 		render_data.scene_data = &scene_data;
+		render_data.light_storage = &render_light_storage;
 
 		render_data.instances = &p_instances;
 		render_data.lights = &p_lights;

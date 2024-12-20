@@ -34,6 +34,8 @@
 #include "servers/rendering/renderer_rd/storage_rd/render_scene_buffers_rd.h"
 #include "servers/rendering/renderer_rd/storage_rd/render_scene_data_rd.h"
 #include "servers/rendering/storage/render_data.h"
+#include "servers/rendering/storage/render_light_storage.h"
+#include "servers/rendering/renderer_rd/storage_rd/render_light_storage_rd.h"
 
 class RenderDataRD : public RenderData {
 	GDCLASS(RenderDataRD, RenderData);
@@ -42,6 +44,7 @@ public:
 	// Access methods to expose data externally
 	virtual Ref<RenderSceneBuffers> get_render_scene_buffers() const override;
 	virtual RenderSceneData *get_render_scene_data() const override;
+	virtual RenderLightStorage *get_render_light_storage() const override;
 
 	virtual RID get_environment() const override;
 	virtual RID get_camera_attributes() const override;
@@ -49,6 +52,7 @@ public:
 	// Members are publicly accessible within the render engine.
 	Ref<RenderSceneBuffersRD> render_buffers;
 	RenderSceneDataRD *scene_data = nullptr;
+	RenderLightStorageRD *light_storage = nullptr;
 
 	const PagedArray<RenderGeometryInstance *> *instances = nullptr;
 	const PagedArray<RID> *lights = nullptr;
